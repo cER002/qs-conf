@@ -27,12 +27,9 @@ PanelWindow {
             }
             spacing: 8
 
+            ClockPill {}
             WorkspacePill {}
             ActiveWindowPill {}
-        }
-
-        ClockPill {
-            anchors.centerIn: parent
         }
 
         Row {
@@ -44,10 +41,11 @@ PanelWindow {
             spacing: 8
             layoutDirection: Qt.RightToLeft
 
-            AudioPill {}
-            WifiPill {}
-            BluetoothPill {}
             BatteryPill {}
+            WifiPill {}
+            AudioPill {}
+            BluetoothPill {}
+            SystemTrayPill {}
         }
     }
 }

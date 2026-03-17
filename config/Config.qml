@@ -1,18 +1,78 @@
+pragma ComponentBehavior: Bound
 pragma Singleton
 import QtQuick
+import Quickshell
+import Quickshell.Io
 
-QtObject {
+Singleton {
     id: root
+    property alias bar: jsonConfig.bar
+    property alias pill: jsonConfig.pill
+    property alias font: jsonConfig.font
+    property alias image: jsonConfig.image
 
-    property var bar: {
-        "height": 50,
-        "margins": 8,
-        "spacing": 8
+    Timer {
+        id: saveTimer
+        interval: 500
+        onTriggered: {
+            root.recentlySaved = true;
+            fileView.writeAdapter();
+            cooldownTimer.restart();
+        }
     }
 
-    property var pill: {
-        "paddingX": 16,
-        "paddingY": 6,
-        "fontSize": 14
+    Timer {
+        id: cooldownTimer
+        interval: 1000
+        onTriggered: root.recentlySaved = false
+    }
+
+    FileView {
+        id: fileView
+
+        path: Quickshell.env("HOME") + "/.config/quickshell/config/config.json"
+        watchChanges: true
+
+        property bool recentlySaved: false
+
+        onFileChanged: {
+            if (!recentlySaved) {
+                reload();
+            }
+        }
+
+        Component.onCompleted: {
+            writeAdapter();
+        }
+
+        onAdapterUpdated: saveTimer.restart()
+
+        adapter: JsonAdapter {
+            id: jsonConfig
+
+            property JsonObject bar: JsonObject {
+                property int height: 40
+                property int margins: 8
+                property int spacing: 8
+            }
+
+            property JsonObject pill: JsonObject {
+                property int paddingX: 16
+                property int paddingY: 6
+                property int height: 32
+            }
+
+            property JsonObject font: JsonObject {
+                property int weightNormal: Font.Normal
+                property int weightMedium: Font.Medium
+                property int weightBold: Font.Bold
+                property int size: 16
+                property string family: "IosevkaNF"
+            }
+
+            property JsonObject image: JsonObject {
+                property int size: 22
+            }
+        }
     }
 }

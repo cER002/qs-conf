@@ -22,12 +22,45 @@ Scope {
 
     property bool isEnabled: (adapter?.enabled ?? false) || (connectedCount > 0)
 
+    property string iconName: {
+        if (!adapter)
+            return "bluetooth-disabled";
+        if (adapter.state === BluetoothAdapterState.Disabled || adapter.state === BluetoothAdapterState.Blocked) {
+            return "bluetooth-disabled";
+        }
+        if (connectedCount > 0) {
+            return "bluetooth-paired";
+        }
+        return "bluetooth-disconnected";
+    }
+
     property string text: {
-        if (!isEnabled)
-            return "󰂲";
+        if (!adapter)
+            return "";
+        if (adapter.state === BluetoothAdapterState.Enabling)
+            return "Enabling...";
+        if (adapter.state === BluetoothAdapterState.Disabling)
+            return "Disabling...";
+        if (adapter.state === BluetoothAdapterState.Blocked)
+            return "Blocked (rfkill)";
+        if (adapter.state === BluetoothAdapterState.Disabled)
+            return "Bluetooth off";
+
         if (connectedCount <= 0)
-            return "󰂯";
-        return "󰂱 " + connectedCount;
+            return "Bluetooth on";
+        return connectedCount + (connectedCount === 1 ? " Device" : " Devices");
+    }
+
+    property bool isTransitioning: {
+        if (!adapter)
+            return false;
+        return adapter.state === BluetoothAdapterState.Enabling || adapter.state === BluetoothAdapterState.Disabling;
+    }
+
+    property bool isBlocked: {
+        if (!adapter)
+            return false;
+        return adapter.state === BluetoothAdapterState.Blocked;
     }
 
     function toggleBluetooth() {
@@ -39,8 +72,6 @@ Scope {
             adapter.enabled = true;
         } else if (adapter.state === BluetoothAdapterState.Enabled || adapter.state === BluetoothAdapterState.Enabling) {
             adapter.enabled = false;
-        } else if (adapter.state === BluetoothAdapterState.Blocked) {
-            console.log("WARNING: Bluetooth is blocked by a physical/software killswitch (rfkill)!");
         }
     }
 }

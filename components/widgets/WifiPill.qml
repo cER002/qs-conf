@@ -1,13 +1,27 @@
 import QtQuick
-import "../../config/"
+import QtQuick.Layouts
 import "../../services/"
 import "../primitives/"
 
 MateriaPill {
-    text: NetworkService.text
-    warning: !NetworkService.isConnected
+    id: wifiPill
+    active: NetworkService.isConnected
+    info: NetworkService.isTransitioning
+    warning: NetworkService.isDisconnected && !NetworkService.isTransitioning
     clickable: true
-    onClicked: {
-        console.log("maybe add a wifi popup");
+    onClicked: NetworkService.toggleWifi()
+
+    RowLayout {
+        Layout.alignment: Qt.AlignVCenter
+        spacing: 8
+
+        StylizedIcon {
+            iconName: NetworkService.iconName
+            overlayColor: wifiPill.textColor
+        }
+        StylizedText {
+            text: NetworkService.text
+            color: wifiPill.textColor
+        }
     }
 }

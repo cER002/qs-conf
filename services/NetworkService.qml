@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 pragma Singleton
 import QtQuick
 import Quickshell
@@ -8,35 +9,57 @@ Scope {
 
     property string ssid: "Disconnected"
     property int signalStrength: 0
-    property bool isConnected: false
+    property string connectionState: "Wifi off"
 
-    property string wifiSymbol: {
+    property bool isConnected: connectionState === "connected"
+    property bool isConnecting: connectionState === "connecting"
+    property bool isDisconnected: connectionState === "disconnected"
+    property bool isDisconnecting: connectionState === "disconnecting"
+    property bool isUnavailable: connectionState === "unavailable"
+    property bool isTransitioning: isConnecting || isDisconnecting
+
+    property string iconName: {
+        if (isUnavailable)
+            return "network-wireless-disconnected";
+        if (isTransitioning)
+            return "network-wireless-acquiring";
         if (!isConnected)
-            return "󰤭  ";
+            return "network-wireless-disconnected";
+
         if (signalStrength > 80)
-            return "󰤨  ";
+            return "network-wireless-signal-excellent";
         if (signalStrength > 60)
-            return "󰤥  ";
+            return "network-wireless-signal-good";
         if (signalStrength > 40)
-            return "󰤢  ";
+            return "network-wireless-signal-ok";
         if (signalStrength > 20)
-            return "󰤟  ";
-        return "󰤯  ";
+            return "network-wireless-signal-weak";
+        return "network-wireless-signal-none";
     }
 
-    property string text: wifiSymbol + (isConnected ? ssid : "Disconnected")
+    property string text: {
+        if (isUnavailable)
+            return "Wifi off";
+        if (isConnecting)
+            return "Connecting...";
+        if (isDisconnecting)
+            return "Disconnecting...";
+        return isConnected ? ssid : "Disconnected";
+    }
 
     Process {
-        id: wifiProcess
+        id: wifiStateFetcher
 
-        command: ["sh", "-c", "wifi=$(nmcli -t -f active,ssid,signal dev wifi | grep '^yes' | head -n 1); if [ -z \"$wifi\" ]; then echo 'no:Disconnected:0'; else echo \"$wifi\"; fi"]
+        running: true
+
+        command: ["sh", "-c", "line=$(nmcli -t -f TYPE,STATE,CONNECTION dev | grep '^wifi:' | head -n 1); state=$(echo \"$line\" | cut -d':' -f2); ssid=$(echo \"$line\" | cut -d':' -f3); if [ \"$state\" = \"connected\" ]; then sig=$(nmcli -t -f active,signal dev wifi | grep '^yes' | head -n 1 | cut -d':' -f2); echo \"connected:$ssid:${sig:-0}\"; elif [ \"$state\" = \"deactivating\" ]; then echo \"disconnecting::0\"; elif [ \"$state\" = \"unavailable\" ]; then echo \"unavailable::0\"; elif [ \"$state\" = \"disconnected\" ]; then echo \"disconnected::0\"; else echo \"connecting:$ssid:0\"; fi"]
 
         stdout: SplitParser {
             splitMarker: "\n"
             onRead: data => {
                 let parts = data.split(":");
                 if (parts.length >= 3) {
-                    root.isConnected = (parts[0] === "yes");
+                    root.connectionState = parts[0];
                     root.ssid = parts[1];
                     root.signalStrength = parseInt(parts[2]);
                 }
@@ -44,11 +67,40 @@ Scope {
         }
     }
 
-    Timer {
-        interval: 3000
+    Process {
+        id: monitorProc
+
         running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: wifiProcess.running = true
+        command: ["nmcli", "monitor"]
+
+        stdout: SplitParser {
+            splitMarker: "\n"
+            onRead: data => {
+                wifiStateFetcher.running = true;
+            }
+        }
+
+        onExited: monitorRestartTimer.start()
+    }
+
+    Timer {
+        id: monitorRestartTimer
+        interval: 2000
+        onTriggered: monitorProc.running = true
+    }
+
+    function toggleWifi() {
+        if (isUnavailable) {
+            toggleWifiProc.command = ["nmcli", "radio", 'wifi', 'on'];
+        }
+        if (!isUnavailable) {
+            toggleWifiProc.command = ["nmcli", "radio", 'wifi', 'off'];
+        }
+
+        toggleWifiProc.running = true;
+    }
+
+    Process {
+        id: toggleWifiProc
     }
 }

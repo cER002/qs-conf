@@ -3,38 +3,38 @@ import QtQuick
 
 QtObject {
     // --- MAIN BACKGROUNDS & ELEVATIONS ---
-    readonly property color background: "#1a110f"
-    readonly property color colorOnBackground: "#f1dfda"
+    readonly property color background: "#0f1417"
+    readonly property color colorOnBackground: "#dfe3e7"
 
-    readonly property color surface: "#1a110f"
-    readonly property color surfaceDim: "#1a110f"
-    readonly property color surfaceBright: "#423733"
+    readonly property color surface: "#0f1417"
+    readonly property color surfaceDim: "#0f1417"
+    readonly property color surfaceBright: "#353a3d"
 
-    readonly property color surfaceContainerLowest: "#140c0a"
-    readonly property color surfaceContainerLow: "#231917"
-    readonly property color surfaceContainer: "#271d1b"
-    readonly property color surfaceContainerHigh: "#322825"
-    readonly property color surfaceContainerHighest: "#3d322f"
+    readonly property color surfaceContainerLowest: "#0a0f11"
+    readonly property color surfaceContainerLow: "#171c1f"
+    readonly property color surfaceContainer: "#1b2023"
+    readonly property color surfaceContainerHigh: "#262b2d"
+    readonly property color surfaceContainerHighest: "#303538"
 
-    readonly property color surfaceVariant: "#53433f"
-    readonly property color colorOnSurface: "#f1dfda"
-    readonly property color colorOnSurfaceVariant: "#d8c2bc"
+    readonly property color surfaceVariant: "#40484c"
+    readonly property color colorOnSurface: "#dfe3e7"
+    readonly property color colorOnSurfaceVariant: "#c0c8cd"
 
     // --- ACCENTS ---
-    readonly property color primary: "#ffb59e"
-    readonly property color colorOnPrimary: "#55200d"
-    readonly property color primaryContainer: "#723521"
-    readonly property color colorOnPrimaryContainer: "#ffdbd0"
+    readonly property color primary: "#8bd0ef"
+    readonly property color colorOnPrimary: "#003546"
+    readonly property color primaryContainer: "#004d64"
+    readonly property color colorOnPrimaryContainer: "#bde9ff"
 
-    readonly property color secondary: "#e7bdb1"
-    readonly property color colorOnSecondary: "#442a22"
-    readonly property color secondaryContainer: "#5d4037"
-    readonly property color colorOnSecondaryContainer: "#ffdbd0"
+    readonly property color secondary: "#b4cad6"
+    readonly property color colorOnSecondary: "#1f333c"
+    readonly property color secondaryContainer: "#354a53"
+    readonly property color colorOnSecondaryContainer: "#d0e6f2"
 
-    readonly property color tertiary: "#d7c68d"
-    readonly property color colorOnTertiary: "#3a3005"
-    readonly property color tertiaryContainer: "#52461a"
-    readonly property color colorOnTertiaryContainer: "#f4e2a7"
+    readonly property color tertiary: "#c6c2ea"
+    readonly property color colorOnTertiary: "#2e2d4d"
+    readonly property color tertiaryContainer: "#454364"
+    readonly property color colorOnTertiaryContainer: "#e3dfff"
 
     // --- UTILITY & STATES ---
     readonly property color error: "#ffb4ab"
@@ -42,6 +42,6 @@ QtObject {
     readonly property color errorContainer: "#93000a"
     readonly property color colorOnErrorContainer: "#ffdad6"
 
-    readonly property color outline: "#a08d87"
-    readonly property color outlineVariant: "#53433f"
+    readonly property color outline: "#8a9297"
+    readonly property color outlineVariant: "#40484c"
 }

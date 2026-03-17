@@ -7,30 +7,10 @@ QtObject {
 
     property int percentage: Math.round(UPower.displayDevice.percentage * 100)
     property bool isCharging: !UPower.onBattery
-    property string batterySymbol: {
-        if (isCharging)
-            return "󰂄 ";
-        if (percentage === 100)
-            return "󰁹 ";
-        if (percentage > 90)
-            return "󰂂 ";
-        if (percentage > 80)
-            return "󰂁 ";
-        if (percentage > 70)
-            return "󰂀 ";
-        if (percentage > 60)
-            return "󰁿";
-        if (percentage > 50)
-            return "󰁾 ";
-        if (percentage > 40)
-            return "󰁽 ";
-        if (percentage > 30)
-            return "󰁼 ";
-        if (percentage > 20)
-            return "󰁻 ";
-        if (percentage > 10)
-            return "󰁺 ";
-        return "󰂎 ";
+    property string iconName: {
+        let level = Math.round(percentage / 10) * 10;
+        let levelStr = level.toString().padStart(3, '0');
+        return "battery-" + levelStr + (isCharging ? "-charging" : "");
     }
-    property string text: batterySymbol + percentage + "%"
+    property string text: percentage + "%"
 }

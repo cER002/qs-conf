@@ -29,6 +29,10 @@ Scope {
     }
 
     property string appClass: {
+        if (title === "Desktop") {
+            return "application-x-desktop";
+        }
+
         if (!rawClass)
             return "";
         let name = rawClass.toLowerCase();

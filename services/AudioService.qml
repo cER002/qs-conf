@@ -9,15 +9,15 @@ Scope {
     property var sink: Pipewire.defaultAudioSink
     property int volume: sink?.audio ? Math.round(sink.audio.volume * 100) : 0
     property bool isMuted: !!sink?.audio?.muted
-
-    property string currentVolume: {
-        if (isMuted)
-            return "  " + volume + "%";
-        if (volume > 66)
-            return "  " + volume + "%";
-        if (volume > 33)
-            return "  " + volume + "%";
-        return " " + volume + "%";
+    property string currentVolume: volume + "%"
+    property string iconName: {
+        if (!sink || isMuted || volume === 0)
+            return "audio-volume-muted";
+        if (volume < 33)
+            return "audio-volume-low";
+        if (volume < 67)
+            return "audio-volume-medium";
+        return "audio-volume-high";
     }
 
     function changeVolume(step) {

@@ -1,8 +1,11 @@
+//@ pragma UseQApplication
 import QtQuick
 import Quickshell
 import "modules/bar"
 
 ShellRoot {
+    id: root
+
     Variants {
         model: Quickshell.screens
 
