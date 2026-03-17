@@ -1,0 +1,22 @@
+{
+    "bar": {
+        "height": 40,
+        "margins": 8,
+        "spacing": 8
+    },
+    "font": {
+        "family": "IosevkaNF",
+        "size": 16,
+        "weightBold": 700,
+        "weightMedium": 500,
+        "weightNormal": 400
+    },
+    "image": {
+        "size": 22
+    },
+    "pill": {
+        "height": 32,
+        "paddingX": 16,
+        "paddingY": 6
+    }
+}
