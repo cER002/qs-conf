@@ -46,22 +46,25 @@ Rectangle {
     Behavior on implicitWidth {
         enabled: root.defaultWidthAnimation
         NumberAnimation {
-            duration: 300
-            easing.type: Easing.OutQuint
+            duration: 500
+            easing.type: Easing.Bezier
+            easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
         }
     }
 
     Behavior on color {
         ColorAnimation {
-            duration: 300
-            easing.type: Easing.InOutQuad
+            duration: 500
+            easing.type: Easing.Bezier
+            easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
         }
     }
 
     Behavior on scale {
         NumberAnimation {
             duration: 150
-            easing.type: Easing.OutQuint
+            easing.type: Easing.Bezier
+            easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
         }
     }
 

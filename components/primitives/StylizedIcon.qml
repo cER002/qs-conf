@@ -12,7 +12,7 @@ IconImage {
     property color overlayColor: Theme.colorOnSurface
 
     implicitSize: Config.image.size
-    visible: parent.iconName !== ""
+    visible: iconName !== "" || source !== ""
     source: Quickshell.iconPath(iconName, "application-x-executable")
 
     layer.enabled: true

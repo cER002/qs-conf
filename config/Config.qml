@@ -51,7 +51,7 @@ Singleton {
             id: jsonConfig
 
             property JsonObject bar: JsonObject {
-                property int height: 40
+                property int height: 50
                 property int margins: 8
                 property int spacing: 8
             }
@@ -59,19 +59,19 @@ Singleton {
             property JsonObject pill: JsonObject {
                 property int paddingX: 16
                 property int paddingY: 6
-                property int height: 32
+                property int height: 42
             }
 
             property JsonObject font: JsonObject {
                 property int weightNormal: Font.Normal
                 property int weightMedium: Font.Medium
                 property int weightBold: Font.Bold
-                property int size: 16
+                property int size: 18
                 property string family: "IosevkaNF"
             }
 
             property JsonObject image: JsonObject {
-                property int size: 22
+                property int size: 32
             }
         }
     }

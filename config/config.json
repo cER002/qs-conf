@@ -1,21 +1,21 @@
 {
     "bar": {
-        "height": 40,
+        "height": 50,
         "margins": 8,
         "spacing": 8
     },
     "font": {
         "family": "IosevkaNF",
-        "size": 16,
+        "size": 18,
         "weightBold": 700,
         "weightMedium": 500,
         "weightNormal": 400
     },
     "image": {
-        "size": 22
+        "size": 32
     },
     "pill": {
-        "height": 32,
+        "height": 42,
         "paddingX": 16,
         "paddingY": 6
     }

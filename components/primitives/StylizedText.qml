@@ -22,6 +22,7 @@ Text {
     font.family: Config.font.family
     font.pixelSize: Config.font.size
     font.weight: Config.font.weightNormal
+    renderType: Text.NativeRendering
     verticalAlignment: Text.AlignVCenter
 
     transformOrigin: Item.Center

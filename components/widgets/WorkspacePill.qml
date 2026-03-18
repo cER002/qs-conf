@@ -42,8 +42,8 @@ MateriaPill {
                     id: dot
                     anchors.centerIn: parent
 
-                    width: dotArea.isActive ? 18 : 8
-                    height: 8
+                    width: dotArea.isActive ? 18 : 10
+                    height: 10
                     radius: height / 2
 
                     color: dotArea.isActive ? Theme.primary : Theme.secondaryContainer

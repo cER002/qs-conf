@@ -15,13 +15,14 @@ MateriaPill {
 
     Item {
         id: wrapper
-        implicitWidth: (trayPill.isExpanded ? iconRow.implicitWidth + 8 : 0) + arrowBtn.width
+        implicitWidth: (trayPill.isExpanded ? iconRow.implicitWidth + arrowBtn.width + 4 : arrowBtn.width)
         implicitHeight: 18
 
         Behavior on implicitWidth {
             NumberAnimation {
                 duration: 500
-                easing.type: Easing.OutQuint
+                easing.type: Easing.Bezier
+                easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
             }
         }
 
@@ -29,7 +30,6 @@ MateriaPill {
             id: iconContainer
             anchors.left: parent.left
             anchors.right: arrowBtn.left
-            anchors.rightMargin: trayPill.isExpanded ? 8 : 0
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             clip: true
@@ -38,7 +38,7 @@ MateriaPill {
                 id: iconRow
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: 8
+                spacing: 10
 
                 Repeater {
                     model: SystemTray.items
@@ -58,7 +58,8 @@ MateriaPill {
                             menu: iconDelegate.modelData.menu
                         }
 
-                        IconImage {
+                        StylizedIcon {
+                            layer.enabled: false
                             anchors.fill: parent
                             scale: iconDelegate.pressed ? 0.9 : 1.0
                             source: iconDelegate.modelData.icon
@@ -89,9 +90,10 @@ MateriaPill {
             cursorShape: Qt.PointingHandCursor
             onClicked: trayPill.isExpanded = !trayPill.isExpanded
 
-            IconImage {
+            StylizedIcon {
                 anchors.centerIn: parent
                 source: Quickshell.iconPath("pan-start-symbolic", "go-previous")
+                overlayColor: trayPill.textColor
                 width: 16
                 height: 16
                 scale: arrowBtn.pressed ? 0.85 : 1.0
@@ -108,11 +110,6 @@ MateriaPill {
                         duration: 300
                         easing.type: Easing.OutQuint
                     }
-                }
-
-                layer.enabled: true
-                layer.effect: ColorOverlay {
-                    color: trayPill.textColor
                 }
             }
         }
