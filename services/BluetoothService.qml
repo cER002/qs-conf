@@ -1,9 +1,10 @@
 pragma Singleton
+
 import QtQuick
 import Quickshell
 import Quickshell.Bluetooth
 
-Scope {
+Singleton {
     id: root
 
     property var adapter: Bluetooth.defaultAdapter
@@ -32,23 +33,6 @@ Scope {
             return "bluetooth-paired";
         }
         return "bluetooth-disconnected";
-    }
-
-    property string text: {
-        if (!adapter)
-            return "";
-        if (adapter.state === BluetoothAdapterState.Enabling)
-            return "Enabling...";
-        if (adapter.state === BluetoothAdapterState.Disabling)
-            return "Disabling...";
-        if (adapter.state === BluetoothAdapterState.Blocked)
-            return "Blocked (rfkill)";
-        if (adapter.state === BluetoothAdapterState.Disabled)
-            return "Bluetooth off";
-
-        if (connectedCount <= 0)
-            return "Bluetooth on";
-        return connectedCount + (connectedCount === 1 ? " Device" : " Devices");
     }
 
     property bool isTransitioning: {

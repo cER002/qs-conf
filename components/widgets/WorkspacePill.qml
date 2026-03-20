@@ -1,8 +1,10 @@
 pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import qs.config
 import qs.services
+import "../effects/"
 import qs.components.primitives
 
 MateriaPill {
@@ -17,8 +19,8 @@ MateriaPill {
 
             delegate: MouseArea {
                 id: dotArea
-                required property int index
 
+                required property int index
                 property int wsNum: index + 1
                 property bool isActive: HyprlandService.activeWsId === wsNum
                 property bool isOccupied: {
@@ -31,36 +33,26 @@ MateriaPill {
                 }
 
                 visible: isActive || isOccupied
-
-                width: visible ? dot.width : 0
+                width: !visible ? 0 : (isActive ? 18 : 10)
                 height: 16
                 cursorShape: Qt.PointingHandCursor
 
                 onClicked: HyprlandService.dispatch("workspace " + dotArea.wsNum)
 
+                Behavior on width {
+                    Anim {}
+                }
+
                 Rectangle {
                     id: dot
-                    anchors.centerIn: parent
 
-                    width: dotArea.isActive ? 18 : 10
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.right: parent.right
                     height: 10
                     radius: height / 2
-
+                    width: parent.width
                     color: dotArea.isActive ? Theme.primary : Theme.secondaryContainer
-
-                    Behavior on width {
-                        NumberAnimation {
-                            duration: 300
-                            easing.type: Easing.OutQuint
-                        }
-                    }
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 300
-                            easing.type: Easing.OutQuint
-                        }
-                    }
                 }
             }
         }

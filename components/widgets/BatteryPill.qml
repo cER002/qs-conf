@@ -1,12 +1,28 @@
 import QtQuick
 import QtQuick.Layouts
+import "../effects/"
 import qs.services
 import qs.components.primitives
 
 MateriaPill {
     id: batteryPill
-    active: BatteryService.isCharging
-    warning: !BatteryService.isCharging && BatteryService.percentage <= 25
+
+    accentRole: "primary"
+    semanticState: {
+        if (!BatteryService.isCharging && BatteryService.percentage <= 25)
+            return "warning";
+        if (BatteryService.isCharging)
+            return "info";
+        return "active";
+    }
+
+    Behavior on implicitWidth {
+        Anim {}
+    }
+
+    Behavior on color {
+        CAnim {}
+    }
 
     RowLayout {
         Layout.alignment: Qt.AlignVCenter

@@ -1,15 +1,36 @@
 import QtQuick
 import QtQuick.Layouts
 import "../../services/"
+import "../effects/"
 import "../primitives/"
 
 MateriaPill {
     id: wifiPill
-    active: NetworkService.isConnected
-    info: NetworkService.isTransitioning
-    warning: NetworkService.isDisconnected && !NetworkService.isTransitioning
+    accentRole: "primary"
+    semanticState: {
+        if (NetworkService.isConnected)
+            return "active";
+        if (NetworkService.isTransitioning)
+            return "info";
+        if (NetworkService.isDisconnected && !NetworkService.isTransitioning)
+            return "warning";
+        return "normal";
+    }
+
     clickable: true
     onClicked: NetworkService.toggleWifi()
+
+    Behavior on implicitWidth {
+        Anim {}
+    }
+
+    Behavior on color {
+        CAnim {}
+    }
+
+    Behavior on scale {
+        Anim {}
+    }
 
     RowLayout {
         Layout.alignment: Qt.AlignVCenter
@@ -18,10 +39,6 @@ MateriaPill {
         StylizedIcon {
             iconName: NetworkService.iconName
             overlayColor: wifiPill.textColor
-        }
-        StylizedText {
-            text: NetworkService.text
-            color: wifiPill.textColor
         }
     }
 }

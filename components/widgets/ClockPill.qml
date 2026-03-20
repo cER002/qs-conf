@@ -1,16 +1,30 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import "../effects/"
 import qs.services
 import qs.components.primitives
 
 MateriaPill {
     id: clockPill
     property bool showFullDate: false
+
+    semanticState: showFullDate ? "info" : "normal"
     clickable: true
-    active: showFullDate
     onClicked: {
         showFullDate = !showFullDate;
+    }
+
+    Behavior on implicitWidth {
+        Anim {}
+    }
+
+    Behavior on color {
+        CAnim {}
+    }
+
+    Behavior on scale {
+        Anim {}
     }
 
     RowLayout {

@@ -1,8 +1,10 @@
 pragma Singleton
+
 import QtQuick
+import Quickshell
 import Quickshell.Services.UPower
 
-QtObject {
+Singleton {
     id: root
 
     property int percentage: Math.round(UPower.displayDevice.percentage * 100)

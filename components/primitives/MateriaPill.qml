@@ -2,37 +2,43 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import qs.config
+import qs.components.effects
 
-Rectangle {
+StylizedRect {
     id: root
 
     default property alias content: contentLayout.data
 
-    property color bgColor: {
-        if (warning)
-            return Theme.errorContainer;
-        if (active)
-            return Theme.primary;
-        if (info)
-            return Theme.secondaryContainer;
-        return Theme.surfaceContainerHigh;
-    }
-    property color textColor: {
-        if (warning)
-            return Theme.colorOnErrorContainer;
-        if (active)
-            return Theme.colorOnPrimary;
-        if (info)
-            return Theme.colorOnSecondaryContainer;
-        return Theme.colorOnSurface;
-    }
+    property string semanticState: "normal"
+    property string accentRole: "primary"
+    property color textColor: Theme.colorOnSurface
     property int paddingX: Config.pill.paddingX
     property int paddingY: Config.pill.paddingY
-    property bool active: false
-    property bool warning: false
-    property bool info: false
     property bool clickable: false
-    property bool defaultWidthAnimation: true
+    readonly property color _roleColor: {
+        switch (accentRole) {
+        case "secondary":
+            return Theme.secondaryContainer;
+        case "tertiary":
+            return Theme.tertiaryContainer;
+        case "primary":
+            return Theme.primaryContainer;
+        default:
+            return Theme.surfaceContainerHigh;
+        }
+    }
+    readonly property color _roleTextColor: {
+        switch (accentRole) {
+        case "secondary":
+            return Theme.colorOnSecondaryContainer;
+        case "tertiary":
+            return Theme.colorOnTertiaryContainer;
+        case "primary":
+            return Theme.colorOnPrimaryContainer;
+        default:
+            return Theme.colorOnSurface;
+        }
+    }
 
     signal clicked
 
@@ -40,33 +46,37 @@ Rectangle {
     implicitHeight: contentLayout.implicitHeight + (paddingY * 2)
     height: Config.pill.height
     radius: height / 2
-    color: root.bgColor
+    color: Theme.surfaceContainerHigh
     scale: (clickable && mouseArea.pressed) ? 0.90 : 1.0
 
-    Behavior on implicitWidth {
-        enabled: root.defaultWidthAnimation
-        NumberAnimation {
-            duration: 500
-            easing.type: Easing.Bezier
-            easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
-        }
-    }
+    state: root.semanticState
 
-    Behavior on color {
-        ColorAnimation {
-            duration: 500
-            easing.type: Easing.Bezier
-            easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
+    states: [
+        State {
+            name: "warning"
+            PropertyChanges {
+                root.color: Theme.errorContainer
+                root.textColor: Theme.colorOnErrorContainer
+            }
+        },
+        State {
+            name: "active"
+            PropertyChanges {
+                root.color: root._roleColor
+                root.textColor: root._roleTextColor
+            }
+        },
+        State {
+            name: "info"
+            PropertyChanges {
+                root.color: Theme.tertiaryContainer
+                root.textColor: Theme.colorOnTertiaryContainer
+            }
+        },
+        State {
+            name: "normal"
         }
-    }
-
-    Behavior on scale {
-        NumberAnimation {
-            duration: 150
-            easing.type: Easing.Bezier
-            easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
-        }
-    }
+    ]
 
     MouseArea {
         id: mouseArea

@@ -4,7 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 
-Scope {
+Singleton {
     id: root
 
     property string ssid: "Disconnected"
@@ -19,13 +19,10 @@ Scope {
     property bool isTransitioning: isConnecting || isDisconnecting
 
     property string iconName: {
-        if (isUnavailable)
-            return "network-wireless-disconnected";
         if (isTransitioning)
             return "network-wireless-acquiring";
-        if (!isConnected)
+        if (isDisconnected)
             return "network-wireless-disconnected";
-
         if (signalStrength > 80)
             return "network-wireless-signal-excellent";
         if (signalStrength > 60)
@@ -35,16 +32,6 @@ Scope {
         if (signalStrength > 20)
             return "network-wireless-signal-weak";
         return "network-wireless-signal-none";
-    }
-
-    property string text: {
-        if (isUnavailable)
-            return "Wifi off";
-        if (isConnecting)
-            return "Connecting...";
-        if (isDisconnecting)
-            return "Disconnecting...";
-        return isConnected ? ssid : "Disconnected";
     }
 
     Process {

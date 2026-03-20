@@ -2,11 +2,10 @@
 
 ## [0.2.0] - 2026-03-18
 ### Added
-- `StylizedText` and `StylizedIcon` atoms for flexible UI building.
-- Semantic state handling (active, warning, error) for all atoms.
+- OSD primitive
 
 ### Changed
-- Swapped rigid `PillContent` for an atomic design system.
+- Workspace + icon Name resolution for performance
 
 ### Fixed
-- `wifiPill` state changes and toggle
+- system tray animations 

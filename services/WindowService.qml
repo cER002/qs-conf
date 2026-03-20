@@ -1,9 +1,10 @@
 pragma Singleton
+
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 
-Scope {
+Singleton {
     id: root
 
     property var activeTop: Hyprland.activeToplevel
@@ -35,19 +36,22 @@ Scope {
 
         if (!rawClass)
             return "";
-        let name = rawClass.toLowerCase();
 
-        if (name.includes(".")) {
-            let parts = name.split(".");
-            name = parts[parts.length - 1];
-        }
+        let raw = rawClass.toLowerCase();
+
+        let stripped = raw.includes(".") ? raw.split(".").pop() : raw;
 
         const aliases = {
             "pavucontrol": "multimedia-volume-control",
-            "code-oss": "visual-studio-code"
+            "xournalpp": "xournal",
+            "proton.vpn.app.gtk": "protonvpn-logo",
+            "nm-connection-editor": "applications-internet",
+            "zathura": "evince",
+            "com.obsproject.studio": "obs",
+            "hyprland-share-picker": "preferences-desktop-display"
         };
 
-        return aliases[name] || name;
+        return aliases[raw] || aliases[stripped] || stripped;
     }
 
     property string text: title

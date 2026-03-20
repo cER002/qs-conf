@@ -9,11 +9,14 @@ IconImage {
     id: root
 
     property string iconName: ""
-    property color overlayColor: Theme.colorOnSurface
+    property color overlayColor: "transparent"
 
     implicitSize: Config.image.size
-    visible: iconName !== "" || source !== ""
-    source: Quickshell.iconPath(iconName, "application-x-executable")
+    visible: source !== ""
+
+    onIconNameChanged: {
+        root.source = Quickshell.iconPath(root.iconName, "application-x-executable");
+    }
 
     layer.enabled: true
     layer.effect: ColorOverlay {

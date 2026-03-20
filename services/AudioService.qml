@@ -3,7 +3,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.Pipewire
 
-Scope {
+Singleton {
     id: root
 
     property var sink: Pipewire.defaultAudioSink

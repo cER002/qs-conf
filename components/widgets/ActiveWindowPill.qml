@@ -1,11 +1,24 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.services
+import "../effects/"
 import qs.components.primitives
 
 MateriaPill {
     id: activeWindowPill
     clip: true
+
+    Behavior on implicitWidth {
+        Anim {}
+    }
+
+    Behavior on color {
+        CAnim {}
+    }
+
+    Behavior on scale {
+        Anim {}
+    }
 
     RowLayout {
         Layout.alignment: Qt.AlignVCenter
@@ -17,7 +30,7 @@ MateriaPill {
         }
         StylizedText {
             text: WindowService.text
-            Layout.maximumWidth: 300
+            Layout.maximumWidth: 200
             elide: Text.ElideRight
             color: activeWindowPill.textColor
         }

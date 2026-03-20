@@ -43,8 +43,8 @@ PanelWindow {
 
             BatteryPill {}
             WifiPill {}
-            AudioPill {}
             BluetoothPill {}
+            AudioPill {}
             SystemTrayPill {}
         }
     }

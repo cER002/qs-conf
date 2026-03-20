@@ -1,13 +1,29 @@
 import QtQuick
 import QtQuick.Layouts
+import "../effects/"
 import qs.services
 import qs.components.primitives
 
 MateriaPill {
     id: audioPill
-    warning: AudioService.isMuted
+
+    accentRole: "normal"
+    semanticState: AudioService.isMuted ? "warning" : "normal"
+
     clickable: true
     onClicked: AudioService.toggleMute()
+
+    Behavior on implicitWidth {
+        Anim {}
+    }
+
+    Behavior on color {
+        CAnim {}
+    }
+
+    Behavior on scale {
+        Anim {}
+    }
 
     RowLayout {
         Layout.alignment: Qt.AlignVCenter

@@ -1,15 +1,37 @@
 import QtQuick
 import QtQuick.Layouts
-import "../../services/"
+import qs.services
+import "../effects/"
 import "../primitives/"
 
 MateriaPill {
     id: bluetoothPill
-    active: BluetoothService.connectedCount > 0
-    info: BluetoothService.isTransitioning
-    warning: BluetoothService.isBlocked
+
+    accentRole: "primary"
+    semanticState: {
+        if (BluetoothService.connectedCount > 0)
+            return "active";
+        if (BluetoothService.isTransitioning)
+            return "info";
+        if (BluetoothService.isBlocked)
+            return "warning";
+        return "normal";
+    }
+
     clickable: true
     onClicked: BluetoothService.toggleBluetooth()
+
+    Behavior on implicitWidth {
+        Anim {}
+    }
+
+    Behavior on color {
+        CAnim {}
+    }
+
+    Behavior on scale {
+        Anim {}
+    }
 
     RowLayout {
         Layout.alignment: Qt.AlignVCenter
@@ -18,11 +40,6 @@ MateriaPill {
         StylizedIcon {
             iconName: BluetoothService.iconName
             overlayColor: bluetoothPill.textColor
-        }
-
-        StylizedText {
-            text: BluetoothService.text
-            color: bluetoothPill.textColor
         }
     }
 }

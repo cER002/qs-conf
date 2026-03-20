@@ -5,40 +5,54 @@ import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import Qt5Compat.GraphicalEffects
+import "../effects/"
 import qs.components.primitives
 
 MateriaPill {
     id: trayPill
-    defaultWidthAnimation: false
-    active: isExpanded
+
     property bool isExpanded: false
 
+    accentRole: "primary"
+    semanticState: isExpanded ? "active" : "normal"
     Item {
-        id: wrapper
-        implicitWidth: (trayPill.isExpanded ? iconRow.implicitWidth + arrowBtn.width + 4 : arrowBtn.width)
-        implicitHeight: 18
+        id: trayLayout
 
-        Behavior on implicitWidth {
-            NumberAnimation {
-                duration: 500
-                easing.type: Easing.Bezier
-                easing.bezierCurve: [0.16, 1, 0.3, 1, 1, 1]
-            }
-        }
+        implicitWidth: trayMask.width + arrowBtn.width
 
         Item {
-            id: iconContainer
-            anchors.left: parent.left
+            id: trayMask
+
             anchors.right: arrowBtn.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            clip: true
+            anchors.verticalCenter: parent.verticalCenter
+            implicitWidth: (trayPill.isExpanded ? iconRow.implicitWidth + 18 : 0)
+            visible: width > 0
+            implicitHeight: trayPill.implicitHeight + 20
+
+            Rectangle {
+                id: pillMask
+                width: trayMask.width
+                height: trayMask.height
+                radius: height / 2
+                visible: false
+            }
+
+            layer.enabled: true
+            layer.effect: OpacityMask {
+                maskSource: pillMask
+            }
+
+            Behavior on implicitWidth {
+                Anim {}
+            }
 
             Row {
                 id: iconRow
-                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: 10
+                layoutDirection: Qt.RightToLeft
+                spacing: 8
 
                 Repeater {
                     model: SystemTray.items
