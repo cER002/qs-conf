@@ -1,11 +1,12 @@
 # Changelog
 
 ## [0.2.0] - 2026-03-18
-### Added
+### Removed
 - OSD primitive
 
 ### Changed
-- Workspace + icon Name resolution for performance
+- Unified Wifi Bluetooth and audio buttons
+- Removed qmldir files for quickshell's auto implementation
 
 ### Fixed
-- system tray animations 
+- Core dumb on color reload 

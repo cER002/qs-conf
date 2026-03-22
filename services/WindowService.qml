@@ -25,7 +25,7 @@ Singleton {
     property string rawClass: {
         if (!activeTop)
             return "";
-        let ipc = activeTop.lastIpcObject;
+        let ipc = activeTop?.lastIpcObject;
         return ipc ? (ipc["class"] ?? "") : "";
     }
 
@@ -48,7 +48,9 @@ Singleton {
             "nm-connection-editor": "applications-internet",
             "zathura": "evince",
             "com.obsproject.studio": "obs",
-            "hyprland-share-picker": "preferences-desktop-display"
+            "hyprland-share-picker": "preferences-desktop-display",
+            "draw.io": "drawio",
+            "mars": "java"
         };
 
         return aliases[raw] || aliases[stripped] || stripped;

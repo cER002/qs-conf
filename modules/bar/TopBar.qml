@@ -42,9 +42,7 @@ PanelWindow {
             layoutDirection: Qt.RightToLeft
 
             BatteryPill {}
-            WifiPill {}
-            BluetoothPill {}
-            AudioPill {}
+            StatusWidget {}
             SystemTrayPill {}
         }
     }

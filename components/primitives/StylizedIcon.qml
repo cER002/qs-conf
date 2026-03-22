@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 import Quickshell.Widgets
-import Qt5Compat.GraphicalEffects
 import qs.config
 
 IconImage {
@@ -16,10 +15,5 @@ IconImage {
 
     onIconNameChanged: {
         root.source = Quickshell.iconPath(root.iconName, "application-x-executable");
-    }
-
-    layer.enabled: true
-    layer.effect: ColorOverlay {
-        color: root.overlayColor
     }
 }

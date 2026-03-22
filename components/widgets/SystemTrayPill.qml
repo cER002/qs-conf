@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Quickshell
-import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import Qt5Compat.GraphicalEffects
 import "../effects/"
@@ -15,6 +14,7 @@ MateriaPill {
 
     accentRole: "primary"
     semanticState: isExpanded ? "active" : "normal"
+
     Item {
         id: trayLayout
 
@@ -73,7 +73,6 @@ MateriaPill {
                         }
 
                         StylizedIcon {
-                            layer.enabled: false
                             anchors.fill: parent
                             scale: iconDelegate.pressed ? 0.9 : 1.0
                             source: iconDelegate.modelData.icon
