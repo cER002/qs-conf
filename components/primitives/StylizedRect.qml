@@ -1,5 +1,5 @@
 import QtQuick
-import "../effects"
+import qs.components.effects
 
 Rectangle {
     id: root

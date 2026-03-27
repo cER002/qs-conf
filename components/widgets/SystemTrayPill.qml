@@ -52,7 +52,7 @@ MateriaPill {
                 anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
                 layoutDirection: Qt.RightToLeft
-                spacing: 8
+                spacing: 12
 
                 Repeater {
                     model: SystemTray.items
@@ -106,7 +106,6 @@ MateriaPill {
             StylizedIcon {
                 anchors.centerIn: parent
                 source: Quickshell.iconPath("pan-start-symbolic", "go-previous")
-                overlayColor: trayPill.textColor
                 width: 16
                 height: 16
                 scale: arrowBtn.pressed ? 0.85 : 1.0

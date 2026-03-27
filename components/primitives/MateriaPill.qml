@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import qs.config
-import qs.components.effects
 
 StylizedRect {
     id: root
@@ -45,7 +44,7 @@ StylizedRect {
     implicitWidth: contentLayout.implicitWidth + (paddingX * 2)
     implicitHeight: contentLayout.implicitHeight + (paddingY * 2)
     height: Config.pill.height
-    radius: height / 2
+    radius: Config.pill.radius
     color: Theme.surfaceContainerHigh
     scale: (clickable && mouseArea.pressed) ? 0.90 : 1.0
 
@@ -89,8 +88,12 @@ StylizedRect {
     RowLayout {
         id: contentLayout
         anchors.fill: parent
-        anchors.leftMargin: root.paddingX
-        anchors.rightMargin: root.paddingY
+        anchors {
+            leftMargin: root.paddingX
+            rightMargin: root.paddingX
+            topMargin: root.paddingY
+            bottomMargin: root.paddingY
+        }
         spacing: 8
     }
 }

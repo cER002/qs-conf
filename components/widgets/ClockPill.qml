@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 import "../effects/"
 import qs.services
 import qs.components.primitives
@@ -33,7 +32,6 @@ MateriaPill {
 
         StylizedIcon {
             iconName: "preferences-system-time-symbolic"
-            overlayColor: clockPill.textColor
         }
 
         StylizedText {

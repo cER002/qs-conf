@@ -8,7 +8,15 @@ Singleton {
     id: root
 
     property int brightness: 0
-    property bool isAvailable: true
+    property string iconName: {
+        if (root.brightness < 33) {
+            return "brightness-low-symbolic";
+        }
+        if (root.brightness < 67) {
+            return "brightness-medium-symbolic";
+        }
+        return "brightness-high-symbolic";
+    }
 
     Process {
         id: brightnessProc

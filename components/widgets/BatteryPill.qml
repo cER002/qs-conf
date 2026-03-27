@@ -30,11 +30,10 @@ MateriaPill {
 
         StylizedIcon {
             iconName: BatteryService.iconName
-            overlayColor: batteryPill.textColor
         }
 
         StylizedText {
-            text: BatteryService.text
+            text: BatteryService.percentage + "%"
             color: batteryPill.textColor
         }
     }

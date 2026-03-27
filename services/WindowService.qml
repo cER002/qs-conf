@@ -45,16 +45,18 @@ Singleton {
             "pavucontrol": "multimedia-volume-control",
             "xournalpp": "xournal",
             "proton.vpn.app.gtk": "protonvpn-logo",
+            "protonvpn-app": "protonvpn-logo",
             "nm-connection-editor": "applications-internet",
             "zathura": "evince",
             "com.obsproject.studio": "obs",
             "hyprland-share-picker": "preferences-desktop-display",
             "draw.io": "drawio",
-            "mars": "java"
+            "mars": "java",
+            "qt5ct": "preferences-system",
+            "qt6ct": "preferences-system",
+            "electron": "electron37"
         };
 
         return aliases[raw] || aliases[stripped] || stripped;
     }
-
-    property string text: title
 }

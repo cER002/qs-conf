@@ -17,6 +17,7 @@
     "pill": {
         "height": 42,
         "paddingX": 16,
-        "paddingY": 6
+        "paddingY": 6,
+        "radius": 21
     }
 }

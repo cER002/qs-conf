@@ -23,7 +23,6 @@ MateriaPill {
                 id: bluetoothIcon
                 anchors.centerIn: parent
                 iconName: BluetoothService.iconName
-                overlayColor: root.textColor
                 scale: bluetoothButton.pressed ? 0.9 : 1
 
                 Behavior on scale {
@@ -50,7 +49,6 @@ MateriaPill {
                 id: wifiIcon
                 anchors.centerIn: parent
                 iconName: NetworkService.iconName
-                overlayColor: root.textColor
                 scale: wifiButton.pressed ? 0.9 : 1
 
                 Behavior on scale {
@@ -77,7 +75,6 @@ MateriaPill {
                 id: audioIcon
                 anchors.centerIn: parent
                 iconName: AudioService.iconName
-                overlayColor: root.textColor
                 scale: audioButton.pressed ? 0.9 : 1
 
                 Behavior on scale {

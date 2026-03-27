@@ -1,49 +1,56 @@
 import QtQuick
 import Quickshell
-import "../../config"
+import qs.config
 import "../../components/widgets/"
 
-PanelWindow {
-    id: barWindow
-    anchors {
-        top: true
-        left: true
-        right: true
-    }
-    implicitHeight: Config.bar.height
-    color: "transparent"
+Variants {
+    model: Quickshell.screens
+    PanelWindow {
+        id: barWindow
 
-    Rectangle {
-        id: barContent
-        width: parent.width
-        height: parent.height
+        required property var modelData
+
+        screen: modelData
+        anchors {
+            top: true
+            left: true
+            right: true
+        }
+        implicitHeight: Config.bar.height
         color: "transparent"
 
-        Row {
-            anchors {
-                left: parent.left
-                margins: 8
-                verticalCenter: parent.verticalCenter
+        Rectangle {
+            id: barContent
+            width: parent.width
+            height: parent.height
+            color: "transparent"
+
+            Row {
+                anchors {
+                    left: parent.left
+                    margins: 8
+                    verticalCenter: parent.verticalCenter
+                }
+                spacing: 8
+
+                ClockPill {}
+                WorkspacePill {}
+                ActiveWindowPill {}
             }
-            spacing: 8
 
-            ClockPill {}
-            WorkspacePill {}
-            ActiveWindowPill {}
-        }
+            Row {
+                anchors {
+                    right: parent.right
+                    margins: 8
+                    verticalCenter: parent.verticalCenter
+                }
+                spacing: 8
+                layoutDirection: Qt.RightToLeft
 
-        Row {
-            anchors {
-                right: parent.right
-                margins: 8
-                verticalCenter: parent.verticalCenter
+                BatteryPill {}
+                StatusWidget {}
+                SystemTrayPill {}
             }
-            spacing: 8
-            layoutDirection: Qt.RightToLeft
-
-            BatteryPill {}
-            StatusWidget {}
-            SystemTrayPill {}
         }
     }
 }

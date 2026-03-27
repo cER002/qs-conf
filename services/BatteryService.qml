@@ -14,5 +14,4 @@ Singleton {
         let levelStr = level.toString().padStart(3, '0');
         return "battery-" + levelStr + (isCharging ? "-charging" : "");
     }
-    property string text: percentage + "%"
 }

@@ -9,7 +9,6 @@ Singleton {
     property var sink: Pipewire.defaultAudioSink
     property int volume: sink?.audio ? Math.round(sink.audio.volume * 100) : 0
     property bool isMuted: !!sink?.audio?.muted
-    property string currentVolume: volume + "%"
     property string iconName: {
         if (!sink || isMuted || volume === 0)
             return "audio-volume-muted";

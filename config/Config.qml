@@ -60,6 +60,7 @@ Singleton {
                 property int paddingX: 16
                 property int paddingY: 6
                 property int height: 42
+                property int radius: 21
             }
 
             property JsonObject font: JsonObject {

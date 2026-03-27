@@ -8,7 +8,6 @@ IconImage {
     id: root
 
     property string iconName: ""
-    property color overlayColor: "transparent"
 
     implicitSize: Config.image.size
     visible: source !== ""
