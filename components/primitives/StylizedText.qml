@@ -6,9 +6,6 @@ Text {
     id: root
 
     property bool animateText: false
-    property bool active: false
-    property bool warning: false
-    property bool info: false
 
     color: Theme.colorOnSurface
 

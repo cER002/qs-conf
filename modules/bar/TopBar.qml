@@ -1,7 +1,8 @@
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 import qs.config
-import "../../components/widgets/"
+import qs.components.widgets
 
 Variants {
     model: Quickshell.screens
@@ -10,6 +11,7 @@ Variants {
 
         required property var modelData
 
+        WlrLayershell.namespace: "quickshell-navbar"
         screen: modelData
         anchors {
             top: true
@@ -19,38 +21,34 @@ Variants {
         implicitHeight: Config.bar.height
         color: "transparent"
 
-        Rectangle {
-            id: barContent
-            width: parent.width
-            height: parent.height
-            color: "transparent"
-
-            Row {
-                anchors {
-                    left: parent.left
-                    margins: 8
-                    verticalCenter: parent.verticalCenter
-                }
-                spacing: 8
-
-                ClockPill {}
-                WorkspacePill {}
-                ActiveWindowPill {}
+        Row {
+            anchors {
+                left: parent.left
+                margins: 8
+                verticalCenter: parent.verticalCenter
             }
+            spacing: 8
 
-            Row {
-                anchors {
-                    right: parent.right
-                    margins: 8
-                    verticalCenter: parent.verticalCenter
-                }
-                spacing: 8
-                layoutDirection: Qt.RightToLeft
+            WorkspacePill {}
+            ActiveWindowPill {}
+        }
 
-                BatteryPill {}
-                StatusWidget {}
-                SystemTrayPill {}
+        ClockPill {
+            anchors.centerIn: parent
+        }
+
+        Row {
+            anchors {
+                right: parent.right
+                margins: 8
+                verticalCenter: parent.verticalCenter
             }
+            spacing: 8
+            layoutDirection: Qt.RightToLeft
+
+            BatteryPill {}
+            StatusWidget {}
+            SystemTrayPill {}
         }
     }
 }

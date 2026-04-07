@@ -88,11 +88,9 @@ StylizedRect {
     RowLayout {
         id: contentLayout
         anchors.fill: parent
+        anchors.verticalCenter: parent.verticalCenter
         anchors {
             leftMargin: root.paddingX
-            rightMargin: root.paddingX
-            topMargin: root.paddingY
-            bottomMargin: root.paddingY
         }
         spacing: 8
     }

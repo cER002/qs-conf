@@ -31,7 +31,7 @@ Singleton {
 
     property string appClass: {
         if (title === "Desktop") {
-            return "application-x-desktop";
+            return "display";
         }
 
         if (!rawClass)
@@ -54,7 +54,11 @@ Singleton {
             "mars": "java",
             "qt5ct": "preferences-system",
             "qt6ct": "preferences-system",
-            "electron": "electron37"
+            "electron": "electron37",
+            "keditfiletype": "kde",
+            "soffice": "libreoffice-main",
+            "podman desktop": "io.podman_desktop.PodmanDesktop",
+            "imv": "loupe"
         };
 
         return aliases[raw] || aliases[stripped] || stripped;

@@ -1,7 +1,6 @@
 import QtQuick
-import QtQuick.Layouts
-import "../effects/"
 import qs.services
+import qs.components.effects
 import qs.components.primitives
 
 MateriaPill {
@@ -26,17 +25,8 @@ MateriaPill {
         Anim {}
     }
 
-    RowLayout {
-        Layout.alignment: Qt.AlignVCenter
-        spacing: 8
-
-        StylizedIcon {
-            iconName: "preferences-system-time-symbolic"
-        }
-
-        StylizedText {
-            color: clockPill.textColor
-            text: clockPill.showFullDate ? Time.currentDate : Time.currentTime
-        }
+    StylizedText {
+        color: clockPill.textColor
+        text: clockPill.showFullDate ? Time.currentDate : Time.currentTime
     }
 }

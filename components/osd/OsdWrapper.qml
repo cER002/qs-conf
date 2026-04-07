@@ -43,8 +43,20 @@ Item {
 
     Connections {
         target: AudioService
-        function onVolumeChanged(): void {
-            root.showOsd(AudioService.volume / 100, "audio");
+        function onDefaultSinkVolumeChanged(): void {
+            root.showOsd(AudioService.defaultSinkVolume / 100, "audio");
+        }
+
+        function onIsSinkMutedChanged(): void {
+            root.showOsd(AudioService.defaultSinkVolume / 100, "audio");
+        }
+
+        function onDefaultSourceVolumeChanged(): void {
+            root.showOsd(AudioService.defaultSourceVolume / 100, "mic");
+        }
+
+        function onIsSourceMutedChanged(): void {
+            root.showOsd(AudioService.defaultSourceVolume / 100, "mic");
         }
     }
 
@@ -63,6 +75,7 @@ Item {
             screen: root.screen
 
             exclusionMode: ExclusionMode.Ignore
+            WlrLayershell.namespace: "quickshell-osd"
             WlrLayershell.layer: WlrLayer.Overlay
 
             anchors.bottom: true

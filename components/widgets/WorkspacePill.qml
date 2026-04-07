@@ -4,7 +4,8 @@ import QtQuick
 import QtQuick.Layouts
 import qs.config
 import qs.services
-import "../effects/"
+import qs.utils
+import qs.components.effects
 import qs.components.primitives
 
 MateriaPill {
@@ -32,7 +33,6 @@ MateriaPill {
                     return false;
                 }
 
-                visible: isActive || isOccupied
                 width: !visible ? 0 : (isActive ? 18 : 10)
                 height: 16
                 cursorShape: Qt.PointingHandCursor
@@ -50,9 +50,9 @@ MateriaPill {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     height: 10
-                    radius: height / 2
+                    radius: 5
                     width: parent.width
-                    color: dotArea.isActive ? Theme.primary : Theme.secondaryContainer
+                    color: dotArea.isActive ? Theme.primary : (dotArea.isOccupied ? Color.setAlpha(Theme.tertiary, 0.5) : Theme.secondaryContainer)
                 }
             }
         }

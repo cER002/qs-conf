@@ -4,7 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.SystemTray
 import Qt5Compat.GraphicalEffects
-import "../effects/"
+import qs.components.effects
 import qs.components.primitives
 
 MateriaPill {
@@ -43,7 +43,9 @@ MateriaPill {
             }
 
             Behavior on implicitWidth {
-                Anim {}
+                Anim {
+                    duration: 550
+                }
             }
 
             Row {
@@ -57,39 +59,7 @@ MateriaPill {
                 Repeater {
                     model: SystemTray.items
 
-                    delegate: MouseArea {
-                        id: iconDelegate
-                        required property SystemTrayItem modelData
-
-                        width: 18
-                        height: 18
-                        acceptedButtons: Qt.LeftButton | Qt.RightButton
-                        cursorShape: Qt.PointingHandCursor
-
-                        QsMenuAnchor {
-                            id: menuAnchor
-                            anchor.item: iconDelegate
-                            menu: iconDelegate.modelData.menu
-                        }
-
-                        StylizedIcon {
-                            anchors.fill: parent
-                            scale: iconDelegate.pressed ? 0.9 : 1.0
-                            source: iconDelegate.modelData.icon
-                        }
-
-                        onClicked: mouse => {
-                            if (mouse.button === Qt.LeftButton) {
-                                iconDelegate.modelData.activate();
-                            } else if (mouse.button === Qt.RightButton) {
-                                if (iconDelegate.modelData.hasMenu) {
-                                    menuAnchor.open();
-                                } else {
-                                    iconDelegate.modelData.secondaryActivate();
-                                }
-                            }
-                        }
-                    }
+                    delegate: TrayItem {}
                 }
             }
         }
@@ -105,11 +75,11 @@ MateriaPill {
 
             StylizedIcon {
                 anchors.centerIn: parent
-                source: Quickshell.iconPath("pan-start-symbolic", "go-previous")
-                width: 16
-                height: 16
+                source: Quickshell.iconPath("arrow-down", "go-previous")
+                width: 20
+                height: 20
                 scale: arrowBtn.pressed ? 0.85 : 1.0
-                rotation: trayPill.isExpanded ? 0 : -90
+                rotation: trayPill.isExpanded ? 90 : 0
 
                 Behavior on scale {
                     NumberAnimation {

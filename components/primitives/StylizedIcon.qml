@@ -9,6 +9,7 @@ IconImage {
 
     property string iconName: ""
 
+    asynchronous: true
     implicitSize: Config.image.size
     visible: source !== ""
 

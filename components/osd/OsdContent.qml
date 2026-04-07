@@ -23,7 +23,13 @@ Item {
         spacing: 12
 
         StylizedIcon {
-            iconName: root.mode === "audio" ? AudioService.iconName : BrightnessService.iconName
+            iconName: {
+                switch (root.mode) {
+                    case "audio": return AudioService.iconName
+                    case "mic": return AudioService.iconNameAlternative
+                    case "brightness": return BrightnessService.iconName
+                }
+            } 
             implicitSize: 32
         }
 
