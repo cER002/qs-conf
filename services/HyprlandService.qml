@@ -15,4 +15,7 @@ Singleton {
     function dispatch(cmd) {
         Hyprland.dispatch(cmd);
     }
+    function monitorFor(screen) {
+        Hyprland.monitorFor(screen);
+    }
 }

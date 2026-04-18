@@ -47,7 +47,6 @@ Singleton {
             "proton.vpn.app.gtk": "protonvpn-logo",
             "protonvpn-app": "protonvpn-logo",
             "nm-connection-editor": "applications-internet",
-            "zathura": "evince",
             "com.obsproject.studio": "obs",
             "hyprland-share-picker": "preferences-desktop-display",
             "draw.io": "drawio",
@@ -55,10 +54,11 @@ Singleton {
             "qt5ct": "preferences-system",
             "qt6ct": "preferences-system",
             "electron": "electron37",
+            "electron40": "electron37",
             "keditfiletype": "kde",
             "soffice": "libreoffice-main",
             "podman desktop": "io.podman_desktop.PodmanDesktop",
-            "imv": "loupe"
+            "xdg-desktop-portal-lxqt": "system-file-manager"
         };
 
         return aliases[raw] || aliases[stripped] || stripped;

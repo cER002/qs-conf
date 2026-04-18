@@ -11,7 +11,7 @@ Rectangle {
 
     width: container.implicitWidth + 32
     height: container.implicitHeight + 16
-    radius: height / 2
+    radius: height / 4
     color: Theme.surfaceContainerHighest
     opacity: root.isActive ? 1 : 0
     scale: root.isActive ? 1 : 0.8

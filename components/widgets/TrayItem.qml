@@ -1,14 +1,14 @@
 import QtQuick
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Services.SystemTray
-import qs.components.primitives
 
 MouseArea {
     id: iconDelegate
     required property SystemTrayItem modelData
 
-    width: 18
-    height: 18
+    implicitWidth: 24
+    implicitHeight: 24
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     cursorShape: Qt.PointingHandCursor
 
@@ -18,9 +18,8 @@ MouseArea {
         menu: iconDelegate.modelData.menu
     }
 
-    StylizedIcon {
+    IconImage {
         anchors.fill: parent
-        implicitSize: 16
         scale: iconDelegate.pressed ? 0.9 : 1.0
         source: iconDelegate.modelData.icon
     }

@@ -1,7 +1,11 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Layouts
-import "../effects/"
+import qs.config
 import qs.services
+import qs.components.effects
 import qs.components.primitives
 
 MateriaPill {
@@ -29,7 +33,14 @@ MateriaPill {
         spacing: 8
 
         StylizedIcon {
+            id: batterySvg
+            implicitSize: Config.pill.imageSize
             iconName: BatteryService.iconName
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                colorization: 1
+                colorizationColor: batteryPill.textColor
+            }
         }
 
         StylizedText {

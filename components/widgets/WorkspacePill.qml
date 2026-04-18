@@ -49,8 +49,8 @@ MateriaPill {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    height: 10
-                    radius: 5
+                    height: 12
+                    radius: 6
                     width: parent.width
                     color: dotArea.isActive ? Theme.primary : (dotArea.isOccupied ? Color.setAlpha(Theme.tertiary, 0.5) : Theme.secondaryContainer)
                 }

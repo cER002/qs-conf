@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import qs.services
 import qs.components.effects
 import qs.components.primitives
@@ -28,5 +29,7 @@ MateriaPill {
     StylizedText {
         color: clockPill.textColor
         text: clockPill.showFullDate ? Time.currentDate : Time.currentTime
+        Layout.fillWidth: true
+        elide: Text.ElideRight
     }
 }

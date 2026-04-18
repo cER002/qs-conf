@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import qs.services
+import qs.config
 import qs.components.effects
 import qs.components.primitives
 
@@ -21,6 +22,7 @@ MateriaPill {
         spacing: 8
 
         StylizedIcon {
+            implicitSize: Config.pill.imageSize
             iconName: WindowService.appClass
         }
         StylizedText {

@@ -11,6 +11,18 @@ Variants {
 
         required property var modelData
 
+        mask: Region {
+            Region {
+                item: leftRow
+            }
+            Region {
+                item: centerWidget
+            }
+            Region {
+                item: rightRow
+            }
+        }
+
         WlrLayershell.namespace: "quickshell-navbar"
         screen: modelData
         anchors {
@@ -22,6 +34,7 @@ Variants {
         color: "transparent"
 
         Row {
+            id: leftRow
             anchors {
                 left: parent.left
                 margins: 8
@@ -34,10 +47,12 @@ Variants {
         }
 
         ClockPill {
+            id: centerWidget
             anchors.centerIn: parent
         }
 
         Row {
+            id: rightRow
             anchors {
                 right: parent.right
                 margins: 8

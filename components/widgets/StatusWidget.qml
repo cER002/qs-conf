@@ -14,13 +14,14 @@ MateriaPill {
         spacing: 8
 
         StylizedRect {
-            color: bluetoothButton.containsMouse ? Color.setAlpha(Theme.colorOnPrimaryContainer, 0.25) : "transparent"
-            Layout.preferredHeight: 34
-            Layout.preferredWidth: 34
+            color: bluetoothButton.containsMouse ? Color.setAlpha(Theme.colorOnPrimaryContainer, 0.2) : "transparent"
+            Layout.preferredHeight: 30
+            Layout.preferredWidth: 30
             radius: parent.height / 2
 
             StylizedIcon {
                 id: bluetoothIcon
+                implicitSize: Config.pill.imageSize
                 anchors.centerIn: parent
                 iconName: BluetoothService.iconName
                 scale: bluetoothButton.pressed ? 0.9 : 1
@@ -40,13 +41,14 @@ MateriaPill {
         }
 
         StylizedRect {
-            color: wifiButton.containsMouse ? Color.setAlpha(Theme.colorOnPrimaryContainer, 0.25) : "transparent"
-            Layout.preferredHeight: 34
-            Layout.preferredWidth: 34
+            color: wifiButton.containsMouse ? Color.setAlpha(Theme.colorOnPrimaryContainer, 0.2) : "transparent"
+            Layout.preferredHeight: 30
+            Layout.preferredWidth: 30
             radius: parent.height / 2
 
             StylizedIcon {
                 id: wifiIcon
+                implicitSize: Config.pill.imageSize
                 anchors.centerIn: parent
                 iconName: NetworkService.iconName
                 scale: wifiButton.pressed ? 0.9 : 1
@@ -66,13 +68,14 @@ MateriaPill {
         }
 
         StylizedRect {
-            color: audioButton.containsMouse ? Color.setAlpha(Theme.colorOnPrimaryContainer, 0.25) : "transparent"
-            Layout.preferredHeight: 34
-            Layout.preferredWidth: 34
+            color: audioButton.containsMouse ? Color.setAlpha(Theme.colorOnPrimaryContainer, 0.2) : "transparent"
+            Layout.preferredHeight: 30
+            Layout.preferredWidth: 30
             radius: parent.height / 2
 
             StylizedIcon {
                 id: audioIcon
+                implicitSize: Config.pill.imageSize
                 anchors.centerIn: parent
                 iconName: AudioService.iconName
                 scale: audioButton.pressed ? 0.9 : 1

@@ -4,6 +4,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Services.SystemTray
 import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 import qs.components.effects
 import qs.components.primitives
 
@@ -25,7 +26,7 @@ MateriaPill {
 
             anchors.right: arrowBtn.left
             anchors.verticalCenter: parent.verticalCenter
-            implicitWidth: (trayPill.isExpanded ? iconRow.implicitWidth + 18 : 0)
+            implicitWidth: (trayPill.isExpanded && iconRow.implicitWidth > 0 ? iconRow.implicitWidth + 10 : 0)
             visible: width > 0
             implicitHeight: trayPill.implicitHeight + 20
 
@@ -33,7 +34,6 @@ MateriaPill {
                 id: pillMask
                 width: trayMask.width
                 height: trayMask.height
-                radius: height / 2
                 visible: false
             }
 
@@ -54,7 +54,7 @@ MateriaPill {
                 anchors.rightMargin: 8
                 anchors.verticalCenter: parent.verticalCenter
                 layoutDirection: Qt.RightToLeft
-                spacing: 12
+                spacing: 8
 
                 Repeater {
                     model: SystemTray.items
@@ -76,10 +76,14 @@ MateriaPill {
             StylizedIcon {
                 anchors.centerIn: parent
                 source: Quickshell.iconPath("arrow-down", "go-previous")
-                width: 20
-                height: 20
+                implicitSize: 20
                 scale: arrowBtn.pressed ? 0.85 : 1.0
                 rotation: trayPill.isExpanded ? 90 : 0
+                layer.enabled: true
+                layer.effect: MultiEffect {
+                    colorization: 1
+                    colorizationColor: trayPill.textColor
+                }
 
                 Behavior on scale {
                     NumberAnimation {

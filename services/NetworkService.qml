@@ -19,19 +19,27 @@ Singleton {
     property bool isTransitioning: isConnecting || isDisconnecting
 
     property string iconName: {
-        if (isTransitioning)
-            return "network-wireless-acquiring";
+        if (isUnavailable)
+            return "network-wireless-signal-none";
         if (isDisconnected)
             return "network-wireless-disconnected";
-        if (signalStrength > 80)
-            return "network-wireless-signal-excellent";
-        if (signalStrength > 60)
-            return "network-wireless-signal-good";
-        if (signalStrength > 40)
-            return "network-wireless-signal-ok";
-        if (signalStrength > 20)
-            return "network-wireless-signal-weak";
-        return "network-wireless-signal-none";
+        if (isTransitioning)
+            return "network-wireless-acquiring";
+
+        if (isConnected) {
+            if (signalStrength > 80)
+                return "network-wireless-signal-excellent";
+            if (signalStrength > 60)
+                return "network-wireless-signal-good";
+            if (signalStrength > 40)
+                return "network-wireless-signal-ok";
+            if (signalStrength > 20)
+                return "network-wireless-signal-weak";
+
+            return "network-wireless-signal-none";
+        }
+
+        return "network-wireless-disconnected";
     }
 
     Process {

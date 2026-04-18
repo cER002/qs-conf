@@ -8,9 +8,6 @@ import Quickshell.Services.Notifications
 Singleton {
     id: root
 
-    property var masterList: []
-    property var popups: masterList.filter(n => n.isPopup)
-
     NotificationServer {
         id: server
 
@@ -21,18 +18,12 @@ Singleton {
         bodyMarkupSupported: true
         actionsSupported: true
         imageSupported: true
+
         onNotification: notif => {
-            console.log("🔔 DBUS CAUGHT:", notif.summary);
-            const newNotif = notifData.createObject(root, {
-                notification: notif
-            });
-            root.masterList = [newNotif, ...root.masterList];
+            notif.tracked = true;
         }
     }
 
-    Component {
-        id: notifData
-
-        NotifcationContent {}
-    }
+    readonly property int notificationCount: server.trackedNotifications.values.length
+    readonly property alias trackedNotifications: server.trackedNotifications
 }

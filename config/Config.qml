@@ -10,6 +10,7 @@ Singleton {
     property alias pill: jsonConfig.pill
     property alias font: jsonConfig.font
     property alias image: jsonConfig.image
+    property alias notify: jsonConfig.notify
 
     Timer {
         id: saveTimer
@@ -59,8 +60,9 @@ Singleton {
             property JsonObject pill: JsonObject {
                 property int paddingX: 16
                 property int paddingY: 6
-                property int height: 42
-                property int radius: 21
+                property int height: 40
+                property int radius: 10
+                property int imageSize: 32
             }
 
             property JsonObject font: JsonObject {
@@ -73,6 +75,11 @@ Singleton {
 
             property JsonObject image: JsonObject {
                 property int size: 32
+            }
+
+            property JsonObject notify: JsonObject {
+                property int imageSize: 48
+                property int imageSizeSmall: 24
             }
         }
     }

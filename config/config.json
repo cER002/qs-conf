@@ -14,10 +14,15 @@
     "image": {
         "size": 32
     },
+    "notify": {
+        "imageSize": 48,
+        "imageSizeSmall": 24
+    },
     "pill": {
-        "height": 42,
+        "height": 40,
+        "imageSize": 32,
         "paddingX": 16,
         "paddingY": 6,
-        "radius": 21
+        "radius": 10
     }
 }

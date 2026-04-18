@@ -2,6 +2,7 @@ pragma Singleton
 
 import QtQuick
 import Quickshell
+// import Quickshell.Io
 import Quickshell.Services.UPower
 
 Singleton {
@@ -14,4 +15,20 @@ Singleton {
         let levelStr = level.toString().padStart(3, '0');
         return "battery-" + levelStr + (isCharging ? "-charging" : "");
     }
+
+    // onPercentageChanged: {
+    //     if (root.isCharging) {
+    //         return;
+    //     }
+    //
+    //
+    // }
+    //
+    // Process {
+    //     id: batteryNotif
+    //     running: true
+    //
+    //
+    //
+    // }
 }

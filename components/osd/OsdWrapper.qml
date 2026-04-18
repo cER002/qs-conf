@@ -8,8 +8,6 @@ import qs.services
 Item {
     id: root
 
-    required property ShellScreen screen
-
     property real currentValue: 0
     property string currentMode: "audio"
     property bool isVisible: false
@@ -17,9 +15,6 @@ Item {
 
     function showOsd(value, mode) {
         if (!root.isReady) {
-            return;
-        }
-        if (root.screen.name !== HyprlandService.focusedMonitor.name) {
             return;
         }
         root.currentValue = value;
@@ -72,7 +67,6 @@ Item {
         active: root.isVisible
 
         PanelWindow {
-            screen: root.screen
 
             exclusionMode: ExclusionMode.Ignore
             WlrLayershell.namespace: "quickshell-osd"
